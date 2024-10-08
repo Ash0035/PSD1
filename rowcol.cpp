@@ -6,16 +6,16 @@ using namespace std;
 
 class TranspositionCipher {
 private:
-    int numCols;  // Number of columns for the grid
+    int numCols;  
 
-    // Helper function to fill the grid row-by-row
+    
     vector<vector<char>> createGrid(const string& message, int& numRows) {
-        numRows = (message.size() + numCols - 1) / numCols;  // Calculate number of rows
+        numRows = (message.size() + numCols - 1) / numCols;  
 
-        // Create a grid with spaces (to handle incomplete rows)
+        
         vector<vector<char>> grid(numRows, vector<char>(numCols, ' '));
 
-        // Fill the grid row-by-row with the message
+        
         int idx = 0;
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col < numCols && idx < message.size(); col++) {
@@ -26,15 +26,15 @@ private:
     }
 
 public:
-    // Constructor to initialize number of columns
+   
     TranspositionCipher(int columns) : numCols(columns) {}
 
-    // Function to encrypt the message
+    
     string encrypt(const string& message) {
         int numRows;
         vector<vector<char>> grid = createGrid(message, numRows);
 
-        // Read the grid column-by-column to generate the encrypted message
+        
         string encryptedMessage;
         for (int col = 0; col < numCols; col++) {
             for (int row = 0; row < numRows; row++) {
@@ -46,12 +46,12 @@ public:
         return encryptedMessage;
     }
 
-    // Function to decrypt the message
+    
     string decrypt(const string& encryptedMessage) {
         int numRows;
         vector<vector<char>> grid = createGrid(encryptedMessage, numRows);
 
-        // Fill the grid column-by-column for decryption
+       
         int idx = 0;
         for (int col = 0; col < numCols; col++) {
             for (int row = 0; row < numRows && idx < encryptedMessage.size(); row++) {
@@ -59,7 +59,7 @@ public:
             }
         }
 
-        // Read the grid row-by-row to reconstruct the original message
+        
         string decryptedMessage;
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col < numCols; col++) {
@@ -82,14 +82,14 @@ int main() {
     cout << "Enter the number of columns for the grid: ";
     cin >> numCols;
 
-    // Create an instance of TranspositionCipher with the given number of columns
+    
     TranspositionCipher cipher(numCols);
 
-    // Encrypt the message
+   
     string encryptedMessage = cipher.encrypt(message);
     cout << "Encrypted Message: " << encryptedMessage << endl;
 
-    // Decrypt the message
+    
     string decryptedMessage = cipher.decrypt(encryptedMessage);
     cout << "Decrypted Message: " << decryptedMessage << endl;
 
